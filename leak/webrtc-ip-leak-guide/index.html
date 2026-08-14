@@ -1,0 +1,16 @@
+---
+layout: default
+title: WebRTC会泄露真实IP吗？检测结果怎么看
+description: 区分WebRTC中的公网IP、内网IP和mDNS名称，提供连接前后检测、异常判断和修复后复测方法。
+schema_type: Article
+date_modified: 2026-08-14
+---
+<article class="article"><header class="article-header"><div class="eyebrow">浏览器信号</div><h1>WebRTC会泄露真实IP吗？检测结果怎么看</h1><p class="dek">WebRTC需要为音视频和点对点通信收集连接候选。检测页显示地址并不自动等于真实公网IP泄露，必须先区分公网地址、RFC1918内网地址和mDNS主机名。</p><div class="meta"><span>最后核对：2026-08-14</span><span>核对范围：现代桌面与移动浏览器</span></div></header>
+<div class="answer"><strong>结论：</strong>连接VPN后，如果WebRTC直接显示连接前的真实公网IP，应继续排查；若只出现192.168、10、172.16至172.31内网地址或随机化mDNS名称，不能据此宣称公网身份已经泄露。</div>
+<h2>先分清三类结果</h2><div class="table-wrap"><table><thead><tr><th>结果类型</th><th>常见形式</th><th>如何理解</th></tr></thead><tbody><tr><td>公网IP</td><td>可在互联网路由的IPv4/IPv6</td><td>若等于连接前真实出口，是强异常信号</td></tr><tr><td>内网IP</td><td>192.168.x.x、10.x.x.x、172.16-31.x.x</td><td>描述本地网络地址，通常不能单独定位公网身份</td></tr><tr><td>mDNS名称</td><td>随机字符串加.local</td><td>浏览器用于减少直接暴露本地地址的机制之一</td></tr></tbody></table></div>
+<h2>检测步骤</h2><ol class="steps"><li>断开VPN，打开WebRTC检测页，记录候选类型，不公开完整公网地址。</li><li>连接VPN并刷新页面，确认候选中是否仍有连接前公网IP。</li><li>在无痕窗口和另一个浏览器复测，排除扩展或浏览器设置差异。</li><li>进行一次真实的浏览器音视频通话测试后再查，因为静态页面不一定触发所有候选。</li><li>调整一个设置后复测，并记录浏览器版本与修改内容。</li></ol>
+<div class="note"><strong>场景示例：</strong>连接后检测页显示一个VPN出口公网IP、一个192.168开头地址和一个.local名称。此结果不能因为出现“本地IP”四个字就判定真实公网地址泄露；需要比较那个公网IP是否等于连接前基线。</div>
+<h2>修复思路与代价</h2><ul><li>先确认VPN或系统是否接管UDP/WebRTC流量，避免直接禁用所有浏览器通信功能。</li><li>检查浏览器隐私设置或可信扩展，但要记录浏览器版本，旧教程可能已经失效。</li><li>如果完全禁用WebRTC，网页会议、语音或点对点功能可能无法使用。</li><li>企业或重要通信场景应按组织安全策略操作，不用未知扩展替代正式配置。</li></ul>
+<h2>FAQ</h2><div class="faq"><details><summary>WebRTC显示192.168地址危险吗？</summary><p>它通常是内网地址，无法在公共互联网直接路由。它可能增加设备或网络环境的可识别信号，但不等于暴露真实公网IP。</p></details><details><summary>关闭WebRTC是最好的办法吗？</summary><p>不一定。关闭会影响视频会议等功能。应先确认是否真的出现连接前公网IP，再选择影响最小的调整。</p></details><details><summary>为什么不同浏览器结果不同？</summary><p>浏览器版本、隐私机制、扩展、代理范围和系统权限都可能改变候选收集方式，因此测试条件必须记录。</p></details></div>
+<h2>来源与工具</h2><ul class="source-list"><li><a href="https://www.ipok.cc/zh/tools/webrtc/">IPOK：WebRTC候选与地址类型说明</a></li><li><a href="https://arxiv.org/abs/1709.05395">研究论文：One Leak Will Sink A Ship</a></li></ul><div class="related"><h2>相关阅读</h2><div class="related-links"><a href="{{ '/leak/dns-leak-test-guide/' | relative_url }}">DNS泄露怎么判断</a><a href="{{ '/check/is-vpn-working/' | relative_url }}">VPN是否生效五项检查</a></div></div></article>
+

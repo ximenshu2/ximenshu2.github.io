@@ -1,0 +1,17 @@
+---
+layout: default
+title: DNS泄露怎么检测？结果判断与复测步骤
+description: 解释DNS泄露的含义、连接前后测试方法、多个DNS服务器和地区不一致的判断边界，并提供复测步骤。
+schema_type: Article
+date_modified: 2026-08-14
+---
+<article class="article"><header class="article-header"><div class="eyebrow">DNS路径</div><h1>DNS泄露怎么检测？结果判断与复测步骤</h1><p class="dek">DNS泄露不是“看到陌生DNS”这么简单。判断重点是：查询是否绕过预期连接路径，以及检测结果能否对应到浏览器DoH、系统DNS或VPN提供的解析器。</p><div class="meta"><span>最后核对：2026-08-14</span><span>核对范围：浏览器DNS查询</span></div></header>
+<div class="answer"><strong>结论：</strong>先比较连接前后解析器，再核对浏览器是否启用DNS over HTTPS。服务器数量多、地区与出口不同，都不能单独证明泄露；出现本地运营商解析器或连接前解析路径，才是需要继续核对的强信号。</div>
+<h2>DNS泄露是什么</h2><p>浏览器访问域名前，要先通过DNS把名称解析为地址。如果网页流量走VPN，但DNS查询仍通过本地网络或其他非预期解析路径发送，外部就可能观察到你查询了哪些域名。这里的“泄露”描述的是查询路径偏离预期，并不等于网页正文被DNS服务器看到。</p>
+<h2>四步检测</h2><ol class="steps"><li>断开VPN，记录解析器名称、地区、运营方和数量。</li><li>连接VPN，在同一浏览器重新测试，不要同时更改系统DNS。</li><li>检查是否仍出现连接前的本地运营商解析器，并记录浏览器DoH设置。</li><li>换第二个浏览器复测；若结果不同，优先检查浏览器级DNS设置。</li></ol>
+<h2>结果判断表</h2><div class="table-wrap"><table><thead><tr><th>观察结果</th><th>能否直接判定泄露</th><th>下一步</th></tr></thead><tbody><tr><td>出现多个DNS服务器</td><td>不能</td><td>核对它们是否属于同一解析服务或不同测试节点</td></tr><tr><td>DNS地区与VPN出口不同</td><td>不能</td><td>核对公共DNS、Anycast和浏览器DoH</td></tr><tr><td>出现连接前本地运营商DNS</td><td>强可疑信号</td><td>检查系统DNS、分流和浏览器设置后复测</td></tr><tr><td>Firefox与其他浏览器结果不同</td><td>不能单独定性</td><td>查看Firefox DoH是否优先于VPN应用DNS</td></tr></tbody></table></div>
+<div class="note"><strong>实际配置示例：</strong>Mozilla说明，在其VPN浏览器扩展环境中，Firefox启用DoH后，浏览器指定的解析器可能优先于VPN应用配置。此时“DNS不是VPN服务商提供”可能是已知配置结果，而不是自动等于泄露。</div>
+<h2>常见误区</h2><ul><li><strong>只看国家名称：</strong>公共解析服务可能使用Anycast，显示位置不一定等于查询真实路径。</li><li><strong>把DNS当浏览历史全文：</strong>DNS通常处理域名解析，不等于能看到HTTPS页面的具体路径和正文。</li><li><strong>检测后同时改很多设置：</strong>一次更改浏览器、系统DNS和客户端，无法知道哪个调整有效。</li><li><strong>公开完整截图：</strong>截图可能包含真实IP、解析器和设备信息，应先脱敏。</li></ul>
+<h2>FAQ</h2><div class="faq"><details><summary>DNS服务器越少越安全吗？</summary><p>不能这样判断。数量取决于解析服务和检测方法，核心是路径是否符合你的配置预期。</p></details><details><summary>使用公共DNS就不会泄露吗？</summary><p>公共DNS改变了解析服务提供者，但不能自动保证查询一定经过VPN，也不能解决Cookie、账号或浏览器指纹。</p></details><details><summary>修复后应该怎么复测？</summary><p>回到同一设备、网络和浏览器，重复连接前后对照，只改变一个设置，并记录新结果。</p></details></div>
+<h2>来源与工具</h2><ul class="source-list"><li><a href="https://support.mozilla.org/en-US/kb/how-will-dns-work-when-using-vpn-extension">Mozilla：VPN扩展环境中的DNS优先级</a></li><li><a href="https://cleanip.io/leak">CleanIP：DNS与WebRTC检测方法说明</a></li></ul><div class="related"><h2>相关阅读</h2><div class="related-links"><a href="{{ '/check/is-vpn-working/' | relative_url }}">连接前后五项检查</a><a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">VPN不能保护什么</a></div></div></article>
+

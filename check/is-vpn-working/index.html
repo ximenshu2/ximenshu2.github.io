@@ -1,0 +1,17 @@
+---
+layout: default
+title: VPN是否生效怎么判断？连接前后5项检查
+description: 用公网IP、DNS、WebRTC、断开状态和跨网络复测判断VPN是否生效，避免只看客户端“已连接”。
+schema_type: Article
+date_modified: 2026-08-14
+---
+<article class="article"><header class="article-header"><div class="eyebrow">开始检测</div><h1>VPN是否生效怎么判断？连接前后5项检查</h1><p class="dek">客户端显示“已连接”只能说明软件报告连接成功。更可靠的方法是保持设备和网络不变，记录连接前基线，再比较公网IP、DNS和WebRTC结果。</p><div class="meta"><span>最后核对：2026-08-14</span><span>适用：Windows、macOS、Android、iOS浏览器</span></div></header>
+<div class="answer"><strong>结论：</strong>至少确认公网出口发生预期变化，并检查DNS与WebRTC没有暴露连接前的真实公网地址。一次检测正常仍不能证明完全匿名，也不能替代隐私政策、账号安全或恶意软件防护。</div>
+<h2>检查前先记录什么</h2><div class="table-wrap"><table><thead><tr><th>项目</th><th>连接前</th><th>连接后预期</th><th>用途</th></tr></thead><tbody><tr><td>公网IP</td><td>当前网络出口</td><td>变为所选连接出口</td><td>判断网站看到的来源是否改变</td></tr><tr><td>大致地区/运营方</td><td>本地网络信息</td><td>与出口信息大体一致</td><td>辅助解释，不单独定性</td></tr><tr><td>DNS解析器</td><td>本地或自定义DNS</td><td>按工具与浏览器配置变化</td><td>发现解析路径是否绕行</td></tr><tr><td>WebRTC候选</td><td>浏览器产生的候选</td><td>不出现连接前真实公网IP</td><td>检查浏览器实时通信暴露</td></tr></tbody></table></div>
+<h2>五项检查步骤</h2><ol class="steps"><li><strong>断开VPN并记录基线。</strong>使用同一浏览器查看公网IP、DNS和WebRTC结果，只保存脱敏截图。</li><li><strong>连接后重新打开检测页。</strong>不要同时换Wi-Fi、浏览器或设备，否则无法判断变化来自哪里。</li><li><strong>比较公网出口。</strong>如果完整公网IP完全没变，先确认是否仅浏览器扩展生效、是否启用了分流，或当前页面是否走直连。</li><li><strong>检查DNS与WebRTC。</strong>重点找连接前真实公网IP；仅出现192.168、10或172.16至172.31开头的内网地址，不等同于公网身份泄露。</li><li><strong>换一个浏览器或移动热点复测。</strong>用第二组结果判断问题更接近浏览器设置、设备配置还是当前网络。</li></ol>
+<div class="note"><strong>示例场景：</strong>连接前公网IP为A，连接后变为B；DNS显示第三方公共解析器，WebRTC只显示mDNS名称。这里能确认网站出口已改变，但不能仅凭DNS地区与B不同就断定泄露，还要核对浏览器DoH和工具的DNS方案。</div>
+<h2>哪些结果需要继续排查</h2><ul><li>连接前后公网IP完全相同，而且目标页面本应经过VPN。</li><li>WebRTC结果直接出现连接前的真实公网IP。</li><li>连接意外中断后，页面立刻恢复显示真实公网IP。</li><li>同一设备上不同浏览器结果持续不同。</li><li>检测工具结论互相矛盾，且没有公开测试方法。</li></ul>
+<h2>优缺点</h2><div class="table-wrap"><table><thead><tr><th>方法</th><th>优点</th><th>局限</th></tr></thead><tbody><tr><td>连接前后对照</td><td>简单、可重复、能定位变化</td><td>只能观察当前设备和当前网络</td></tr><tr><td>多个工具交叉检查</td><td>降低单站实现差异影响</td><td>检测站本身都会看到访问IP</td></tr><tr><td>换浏览器/网络复测</td><td>有助于区分浏览器与系统问题</td><td>变量更多，需要完整记录条件</td></tr></tbody></table></div>
+<h2>FAQ</h2><div class="faq"><details><summary>客户端显示已连接，为什么IP没变？</summary><p>可能是分流、仅部分应用代理、浏览器扩展范围或连接未真正接管当前页面。保持其他条件不变，换一个页面与浏览器复测。</p></details><details><summary>只用一个IP查询网站够吗？</summary><p>不够。它只能告诉你该网站看到的出口，不能完整解释DNS、WebRTC、账号登录或浏览器指纹。</p></details><details><summary>手机和电脑需要分别检查吗？</summary><p>需要。不同系统、浏览器和客户端配置可能产生不同路径，不能用电脑结果替代手机。</p></details></div>
+<h2>来源</h2><ul class="source-list"><li><a href="https://ssd.eff.org/module/vpn.html">EFF：Choosing the VPN That's Right for You</a></li><li><a href="https://www.ftc.gov/business-guidance/blog/2018/02/market-vpn-app">FTC：In the market for a VPN app?</a></li></ul><div class="related"><h2>继续检查</h2><div class="related-links"><a href="{{ '/leak/dns-leak-test-guide/' | relative_url }}">DNS泄露结果怎么判断</a><a href="{{ '/leak/webrtc-ip-leak-guide/' | relative_url }}">WebRTC出现IP怎么办</a></div></div></article>
+
