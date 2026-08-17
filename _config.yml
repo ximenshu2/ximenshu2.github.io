@@ -6,5 +6,7 @@ lang: zh-CN
 timezone: Asia/Shanghai
 markdown: kramdown
 
+theme_color: "#147a5b"
+
 exclude:
   - README.md
