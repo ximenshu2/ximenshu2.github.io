@@ -55,7 +55,7 @@
 
   <meta
     property="og:type"
-    content="{{ page.og_type | default: 'article' }}"
+    content="{% if page.schema_type == 'Article' %}article{% else %}website{% endif %}"
   >
 
   <meta
