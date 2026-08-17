@@ -3,7 +3,7 @@ layout: default
 title: DNS泄露怎么检测？结果判断与复测步骤
 description: 解释DNS泄露的含义、连接前后测试方法、多个DNS服务器和地区不一致的判断边界，并提供复测步骤。
 schema_type: Article
-date_modified: 2026-08-14
+date_modified: 2026-08-17
 ---
 
 <article class="article">
@@ -17,7 +17,7 @@ date_modified: 2026-08-14
     </p>
 
     <div class="meta">
-      <span>最后更新：2026-08-14</span>
+      <span>最后更新：2026-08-17</span>
       <span>核对范围：浏览器DNS查询</span>
     </div>
   </header>
@@ -147,7 +147,7 @@ date_modified: 2026-08-14
     </details>
   </div>
 
-  <h2>来源与工具</h2>
+  <h2>技术参考</h2>
 
   <ul class="source-list">
     <li>
@@ -155,10 +155,18 @@ date_modified: 2026-08-14
         Mozilla：VPN扩展环境中的DNS优先级
       </a>
     </li>
+  </ul>
 
+  <h2>辅助测试工具</h2>
+
+  <p>
+    第三方检测网站可以用于交叉观察当前浏览器的DNS结果，但其检测结果不应单独作为技术定义或最终结论。
+  </p>
+
+  <ul class="source-list">
     <li>
       <a href="https://cleanip.io/leak">
-        CleanIP：DNS与WebRTC检测方法说明
+        CleanIP：DNS与WebRTC检测
       </a>
     </li>
   </ul>
@@ -168,11 +176,11 @@ date_modified: 2026-08-14
 
     <div class="related-links">
       <a href="{{ '/check/is-vpn-working/' | relative_url }}">
-        连接前后五项检查
+        VPN 是否生效怎么检查
       </a>
 
-      <a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">
-        VPN不能保护什么
+      <a href="{{ '/leak/webrtc-ip-leak-guide/' | relative_url }}">
+        WebRTC IP 暴露怎么判断
       </a>
     </div>
   </div>
