@@ -13,6 +13,11 @@
     content="{{ site.theme_color | default: '#147a5b' }}"
   >
 
+  <meta
+    name="referrer"
+    content="strict-origin-when-cross-origin"
+  >
+
   <title>{% if page.title contains site.title %}{{ page.title }}{% elsif page.home %}{{ page.title }}{% else %}{{ page.title }}｜{{ site.title }}{% endif %}</title>
 
   <meta
