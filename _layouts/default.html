@@ -8,6 +8,11 @@
     content="width=device-width, initial-scale=1"
   >
 
+  <meta
+    name="theme-color"
+    content="{{ site.theme_color | default: '#147a5b' }}"
+  >
+
   <title>{% if page.title contains site.title %}{{ page.title }}{% elsif page.home %}{{ page.title }}{% else %}{{ page.title }}｜{{ site.title }}{% endif %}</title>
 
   <meta
