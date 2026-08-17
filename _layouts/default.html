@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1"
   >
 
-  <title>{{ page.title | default: site.title }}</title>
+  <title>{% if page.title contains site.title %}{{ page.title }}{% elsif page.home %}{{ page.title }}{% else %}{{ page.title }}｜{{ site.title }}{% endif %}</title>
 
   <meta
     name="description"
