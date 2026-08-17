@@ -18,16 +18,16 @@
     content="strict-origin-when-cross-origin"
   >
 
-  <title>{% if page.title contains site.title %}{{ page.title }}{% elsif page.home %}{{ page.title }}{% else %}{{ page.title }}｜{{ site.title }}{% endif %}</title>
+  <title>{% if page.title contains site.title %}{{ page.title | escape }}{% elsif page.home %}{{ page.title | escape }}{% else %}{{ page.title | escape }}｜{{ site.title | escape }}{% endif %}</title>
 
   <meta
     name="description"
-    content="{{ page.description | default: site.description }}"
+    content="{{ page.description | default: site.description | escape }}"
   >
 
   <meta
     name="robots"
-    content="{{ page.robots | default: 'index, follow, max-image-preview:large' }}"
+    content="{{ page.robots | default: 'index, follow, max-image-preview:large' | escape }}"
   >
 
   <link
@@ -53,7 +53,7 @@
 
   <meta
     property="og:site_name"
-    content="{{ site.title }}"
+    content="{{ site.title | escape }}"
   >
 
   <meta
@@ -63,12 +63,12 @@
 
   <meta
     property="og:title"
-    content="{{ page.title | default: site.title }}"
+    content="{{ page.title | default: site.title | escape }}"
   >
 
   <meta
     property="og:description"
-    content="{{ page.description | default: site.description }}"
+    content="{{ page.description | default: site.description | escape }}"
   >
 
   <meta
@@ -122,12 +122,12 @@
 
   <meta
     name="twitter:title"
-    content="{{ page.title | default: site.title }}"
+    content="{{ page.title | default: site.title | escape }}"
   >
 
   <meta
     name="twitter:description"
-    content="{{ page.description | default: site.description }}"
+    content="{{ page.description | default: site.description | escape }}"
   >
 
   <meta
@@ -178,10 +178,12 @@
       "height": 916
     },
 
+    {% if page.schema_type == "Article" %}
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": {{ page.url | absolute_url | jsonify }}
     },
+    {% endif %}
 
     "isPartOf": {
       "@type": "WebSite",
@@ -289,7 +291,10 @@
       </p>
     </div>
 
-    <div class="footer-links">
+    <nav
+      class="footer-links"
+      aria-label="页脚导航"
+    >
 
       <a href="{{ '/check/is-vpn-working/' | relative_url }}">
         VPN 自查
@@ -307,7 +312,7 @@
         隐私说明
       </a>
 
-    </div>
+    </nav>
 
   </footer>
 
