@@ -42,6 +42,19 @@ date_modified: 2026-08-17
     也不等于DNS解析器能够看到HTTPS页面中的具体路径、正文或你在网页中填写的内容。
   </p>
 
+  <h2>DNS over HTTPS 会改变什么</h2>
+
+  <p>
+    DNS over HTTPS（DoH）会把DNS查询封装在HTTPS连接中发送给指定的DoH解析器。
+    这会改变谁可以直接观察DNS查询内容，但并不意味着查询一定经过VPN。
+  </p>
+
+  <p>
+    如果浏览器自己启用了DoH，它可能优先使用浏览器配置的解析器。
+    因此，VPN连接正常但检测结果显示第三方公共DNS，并不一定代表泄露；
+    还要核对浏览器DoH设置是否与当前结果一致。
+  </p>
+
   <h2>四步检测</h2>
 
   <ol class="steps">
@@ -121,6 +134,11 @@ date_modified: 2026-08-17
     </li>
 
     <li>
+      <strong>看到公共DNS就判定泄露：</strong>
+      浏览器DoH、自定义DNS或系统级加密DNS都可能改变解析器结果。
+    </li>
+
+    <li>
       <strong>检测后同时改很多设置：</strong>
       一次更改浏览器、系统DNS和客户端，无法知道哪个调整有效。
     </li>
@@ -149,6 +167,14 @@ date_modified: 2026-08-17
     </details>
 
     <details>
+      <summary>启用DoH就一定更安全吗？</summary>
+      <p>
+        DoH可以加密浏览器到DoH解析器之间的DNS查询，
+        但它改变的是解析路径和可见方，不代表所有网络流量都经过同一隐私保护路径。
+      </p>
+    </details>
+
+    <details>
       <summary>修复后应该怎么复测？</summary>
       <p>
         回到同一设备、网络和浏览器，重复连接前后对照，只改变一个设置，并记录新结果。
@@ -166,6 +192,16 @@ date_modified: 2026-08-17
         rel="noopener noreferrer"
       >
         Mozilla：VPN扩展环境中的DNS优先级
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="https://support.mozilla.org/en-US/kb/firefox-dns-over-https"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Mozilla：Firefox DNS over HTTPS
       </a>
     </li>
   </ul>
