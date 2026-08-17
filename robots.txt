@@ -6,4 +6,4 @@ permalink: /robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://ximenshu2.github.io/sitemap.xml
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
