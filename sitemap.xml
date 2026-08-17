@@ -6,7 +6,7 @@ permalink: /sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   {% for page_item in site.pages %}
-    {% unless page_item.url == '/404.html' or page_item.url == '/robots.txt' or page_item.url == '/sitemap.xml' %}
+    {% unless page_item.sitemap == false or page_item.url == '/robots.txt' or page_item.url == '/sitemap.xml' %}
   <url>
     <loc>{{ page_item.url | absolute_url }}</loc>
     {% if page_item.date_modified %}
