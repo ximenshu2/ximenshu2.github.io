@@ -111,6 +111,7 @@ img{
 }
 
 .site-nav a{
+  position:relative;
   text-decoration:none;
   color:#33403b;
   font-size:15px;
@@ -119,6 +120,21 @@ img{
 
 .site-nav a:hover{
   color:var(--green)
+}
+
+.site-nav a[aria-current="page"]{
+  color:var(--green-dark);
+  font-weight:800
+}
+
+.site-nav a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  background:var(--green)
 }
 
 .nav-toggle{
@@ -507,6 +523,15 @@ img{
   .site-nav a{
     width:100%;
     padding:7px 0
+  }
+
+  .site-nav a[aria-current="page"]::after{
+    display:none
+  }
+
+  .site-nav a[aria-current="page"]{
+    padding-left:12px;
+    border-left:3px solid var(--green)
   }
 
   .hero{
