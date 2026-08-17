@@ -166,6 +166,7 @@
         class="brand"
         href="{{ '/' | relative_url }}"
         aria-label="网络隐私检测指南首页"
+        {% if page.url == '/' %}aria-current="page"{% endif %}
       >
         <span
           class="brand-mark"
@@ -193,19 +194,31 @@
         aria-label="主导航"
       >
 
-        <a href="{{ '/check/is-vpn-working/' | relative_url }}">
+        <a
+          href="{{ '/check/is-vpn-working/' | relative_url }}"
+          {% if page.url == '/check/is-vpn-working/' %}aria-current="page"{% endif %}
+        >
           VPN 自查
         </a>
 
-        <a href="{{ '/leak/dns-leak-test-guide/' | relative_url }}">
+        <a
+          href="{{ '/leak/dns-leak-test-guide/' | relative_url }}"
+          {% if page.url == '/leak/dns-leak-test-guide/' %}aria-current="page"{% endif %}
+        >
           DNS
         </a>
 
-        <a href="{{ '/leak/webrtc-ip-leak-guide/' | relative_url }}">
+        <a
+          href="{{ '/leak/webrtc-ip-leak-guide/' | relative_url }}"
+          {% if page.url == '/leak/webrtc-ip-leak-guide/' %}aria-current="page"{% endif %}
+        >
           WebRTC
         </a>
 
-        <a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">
+        <a
+          href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}"
+          {% if page.url == '/privacy/what-vpn-does-not-protect/' %}aria-current="page"{% endif %}
+        >
           隐私边界
         </a>
 
