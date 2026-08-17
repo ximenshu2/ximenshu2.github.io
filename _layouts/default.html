@@ -30,6 +30,25 @@
     property="og:image"
     content="{{ '/assets/images/privacy-lab-hero.webp' | absolute_url }}"
   >
+  <meta
+    property="og:image:alt"
+    content="网络隐私检测指南：VPN、IP、DNS 与 WebRTC 检测"
+  >
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+  <meta
+    name="twitter:description"
+    content="{{ page.description | default: site.description }}"
+  >
+  <meta
+    name="twitter:image"
+    content="{{ '/assets/images/privacy-lab-hero.webp' | absolute_url }}"
+  >
+  <meta
+    name="twitter:image:alt"
+    content="网络隐私检测指南：VPN、IP、DNS 与 WebRTC 检测"
+  >
 
   {% if page.home %}
   <link
