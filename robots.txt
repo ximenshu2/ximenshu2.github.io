@@ -2,8 +2,8 @@
 layout: null
 permalink: /robots.txt
 ---
+
 User-agent: *
 Allow: /
 
 Sitemap: https://ximenshu2.github.io/sitemap.xml
-
