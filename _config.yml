@@ -1,10 +1,10 @@
 title: 网络隐私检测指南
-description: 通过连接前后对照检查VPN是否生效，理解IP、DNS和WebRTC检测结果，并在修复后复测。
+description: 提供VPN是否生效、IP变化、DNS泄露、WebRTC暴露与网络隐私边界的检测方法和判断指南。
 url: "https://ximenshu2.github.io"
 baseurl: ""
 lang: zh-CN
 timezone: Asia/Shanghai
 markdown: kramdown
+
 exclude:
   - README.md
-
