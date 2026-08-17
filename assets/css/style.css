@@ -472,8 +472,8 @@ img{
 
 /*
   默认情况下内容直接可见。
-  只有 HTML 上存在 .js 时，才启用 reveal 动画。
-  这样即使 JavaScript 加载失败，正文也不会消失。
+  只有 site.js 成功执行并给 html 添加 .js 后，
+  才启用滚动淡入效果。
 */
 
 .reveal{
@@ -493,54 +493,104 @@ img{
 }
 
 @media(max-width:760px){
+
   body{
     font-size:16px
   }
 
+  /*
+    无 JavaScript 时：
+    导航直接显示，保证所有主要链接仍然可访问。
+  */
+
   .site-header{
-    height:62px
+    height:auto;
+    min-height:62px
   }
 
   .nav-shell{
-    padding:0 18px
+    min-height:62px;
+    height:auto;
+    padding:0 18px;
+    flex-wrap:wrap
   }
 
   .brand{
+    min-height:62px;
     font-size:15px
   }
 
   .nav-toggle{
-    display:block
+    display:none
   }
 
   .site-nav{
-    display:none;
-    position:absolute;
-    top:62px;
-    left:0;
-    right:0;
-    background:#fff;
-    border-bottom:1px solid var(--line);
-    padding:18px;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:14px
-  }
-
-  .site-nav.open{
-    display:flex
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    padding:0 0 14px
   }
 
   .site-nav a{
-    width:100%;
-    padding:7px 0
+    padding:4px 0
   }
 
   .site-nav a[aria-current="page"]::after{
     display:none
   }
 
-  .site-nav a[aria-current="page"]{
+  /*
+    JavaScript 正常工作时：
+    恢复汉堡菜单和下拉导航。
+  */
+
+  .js .site-header{
+    height:62px;
+    min-height:62px
+  }
+
+  .js .nav-shell{
+    height:100%;
+    min-height:0;
+    flex-wrap:nowrap
+  }
+
+  .js .brand{
+    min-height:0
+  }
+
+  .js .nav-toggle{
+    display:block
+  }
+
+  .js .site-nav{
+    display:none;
+    position:absolute;
+    top:62px;
+    left:0;
+    right:0;
+    width:auto;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:18px;
+    flex-direction:column;
+    flex-wrap:nowrap;
+    align-items:flex-start;
+    gap:14px
+  }
+
+  .js .site-nav.open{
+    display:flex
+  }
+
+  .js .site-nav a{
+    width:100%;
+    padding:7px 0
+  }
+
+  .js .site-nav a[aria-current="page"]{
     padding-left:12px;
     border-left:3px solid var(--green)
   }
@@ -629,6 +679,7 @@ img{
 }
 
 @media(prefers-reduced-motion:reduce){
+
   html{
     scroll-behavior:auto
   }
