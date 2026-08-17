@@ -7,9 +7,193 @@ og_type: website
 schema_type: WebSite
 date_modified: 2026-08-14
 ---
-<section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">先记录基线，再判断变化</div><h1>检查连接后暴露了哪些网络信息</h1><p>一次“IP已变化”不能证明完全安全。把连接前后的公网IP、DNS解析器和WebRTC结果放在一起，才能知道哪里符合预期、哪里还要复测。</p><div class="actions"><a class="button primary" href="{{ '/check/is-vpn-working/' | relative_url }}">开始五项检查</a><a class="button secondary" href="#signals">先看三类信号</a></div></div></div></section>
-<section id="signals" class="section"><div class="section-inner"><div class="section-heading reveal"><div class="eyebrow">三类信号</div><h2>不要把所有结果都叫作“IP泄露”</h2><p>检测页里出现的地址来自不同环节。先认清它代表什么，再决定是否异常。</p></div><div class="signal-grid reveal"><article class="signal"><span class="number">01 / 出口</span><h3>公网IP</h3><p>网站看到的网络出口。连接后通常应变为工具出口，而不是连接前的公网地址。</p></article><article class="signal"><span class="number">02 / 解析</span><h3>DNS</h3><p>把域名转换为地址的解析器。地区不同不自动等于泄露，关键要结合服务商和连接路径。</p></article><article class="signal"><span class="number">03 / 浏览器</span><h3>WebRTC</h3><p>浏览器实时通信使用的候选地址。内网地址、mDNS名称与真实公网地址需要分开判断。</p></article></div></div></section>
-<section class="section soft"><div class="section-inner"><div class="section-heading reveal"><div class="eyebrow">可复现流程</div><h2>五步完成一次隐私自查</h2></div><ol class="path-list reveal"><li><strong>记录连接前基线</strong><br>保存公网IP、DNS和浏览器环境，不公开完整地址。</li><li><strong>建立连接后复测</strong><br>保持设备和网络不变，只改变连接状态。</li><li><strong>比较三类信号</strong><br>判断哪些结果改变、哪些保留、哪些无法单独下结论。</li><li><strong>换浏览器或网络验证</strong><br>排除浏览器设置、缓存或当前网络造成的差异。</li><li><strong>修复后再测一次</strong><br>记录调整内容，避免凭感觉写“已经解决”。</li></ol></div></section>
-<section class="section"><div class="section-inner"><div class="section-heading reveal"><div class="eyebrow">快速判断</div><h2>哪些结果需要继续核对</h2></div><div class="table-wrap reveal"><table><thead><tr><th>检测结果</th><th>初步判断</th><th>下一步</th></tr></thead><tbody><tr><td>连接后公网IP变为预期出口</td><td>出口变化符合预期</td><td>继续检查DNS与WebRTC</td></tr><tr><td>连接前后公网IP完全相同</td><td>可能未接管当前页面</td><td>核对分流、扩展范围并换浏览器复测</td></tr><tr><td>WebRTC显示192.168等内网地址</td><td>不能直接判定公网IP泄露</td><td>比较是否出现连接前真实公网IP</td></tr><tr><td>DNS地区与出口不同</td><td>不能仅凭地区定性</td><td>核对公共DNS、Anycast和浏览器DoH</td></tr></tbody></table></div></div></section>
-<section class="section"><div class="section-inner boundary reveal"><div><div class="eyebrow">VPN可以帮助</div><h2>保护传输路径的一部分</h2><ul><li>改变网站看到的公网出口地址。</li><li>在设备与VPN服务器之间建立加密传输路径。</li><li>降低本地网络直接观察传输内容的能力。</li></ul></div><div><div class="eyebrow">VPN不能自动解决</div><h2>账号、Cookie与设备识别</h2><ul><li>登录账号后，网站仍知道账号身份。</li><li>Cookie、像素和浏览器指纹仍可关联访问。</li><li>恶意软件、弱密码和过度应用权限仍需单独处理。</li></ul><a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">查看完整隐私边界 →</a></div></div></section>
-<section class="section soft"><div class="section-inner"><div class="section-heading reveal"><div class="eyebrow">官方信息与独立检测</div><h2>把产品说明与检测结果分开记录</h2><p>官网可以说明产品当前如何描述功能，检测只能反映特定设备、网络和时间下的结果。需要核对绝尘加速器当前说明时，请访问<a href="https://www.juechenjsq.co/" rel="nofollow sponsored">绝尘加速器官网</a>；不要把官方描述写成独立实测结论。</p></div><div class="faq reveal"><details><summary>连接成功就代表没有泄露吗？</summary><p>不代表。至少还要比较公网IP、DNS和WebRTC，并记录连接前基线。</p></details><details><summary>一个检测工具显示正常是否足够？</summary><p>不够。不同工具观察的信号和实现不同，重要场景应使用第二个工具或浏览器交叉复测。</p></details><details><summary>检测网站本身会看到我的IP吗？</summary><p>会。网站要响应请求就会接触访问来源，因此不应把未知检测站当作零信任环境，也不要上传包含账号或完整地址的截图。</p></details></div></div></section>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">先记录基线，再判断变化</div>
+      <h1>检查连接后暴露了哪些网络信息</h1>
+      <p>一次“IP已变化”不能证明完全安全。把连接前后的公网IP、DNS解析器和WebRTC结果放在一起，才能知道哪里符合预期、哪里还要复测。</p>
+      <div class="actions">
+        <a class="button primary" href="{{ '/check/is-vpn-working/' | relative_url }}">检查 VPN 是否真的生效</a>
+        <a class="button secondary" href="#signals">先看三类信号</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="signals" class="section">
+  <div class="section-inner">
+    <div class="section-heading reveal">
+      <div class="eyebrow">三类信号</div>
+      <h2>不要把所有结果都叫作“IP泄露”</h2>
+      <p>检测页里出现的地址来自不同环节。先认清它代表什么，再决定是否异常。</p>
+    </div>
+
+    <div class="signal-grid reveal">
+      <article class="signal">
+        <span class="number">01 / 出口</span>
+        <h3>公网IP</h3>
+        <p>网站看到的网络出口。连接后通常应变为工具出口，而不是连接前的公网地址。</p>
+      </article>
+
+      <article class="signal">
+        <span class="number">02 / 解析</span>
+        <h3>DNS</h3>
+        <p>把域名转换为地址的解析器。地区不同不自动等于泄露，关键要结合服务商和连接路径。</p>
+      </article>
+
+      <article class="signal">
+        <span class="number">03 / 浏览器</span>
+        <h3>WebRTC</h3>
+        <p>浏览器实时通信使用的候选地址。内网地址、mDNS名称与真实公网地址需要分开判断。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="section-inner">
+    <div class="section-heading reveal">
+      <div class="eyebrow">可复现流程</div>
+      <h2>五步完成一次隐私自查</h2>
+    </div>
+
+    <ol class="path-list reveal">
+      <li>
+        <strong>记录连接前基线</strong><br>
+        保存公网IP、DNS和浏览器环境，不公开完整地址。
+      </li>
+
+      <li>
+        <strong>建立连接后复测</strong><br>
+        保持设备和网络不变，只改变连接状态。
+      </li>
+
+      <li>
+        <strong>比较三类信号</strong><br>
+        判断哪些结果改变、哪些保留、哪些无法单独下结论。
+      </li>
+
+      <li>
+        <strong>换浏览器或网络验证</strong><br>
+        排除浏览器设置、缓存或当前网络造成的差异。
+      </li>
+
+      <li>
+        <strong>修复后再测一次</strong><br>
+        记录调整内容，避免凭感觉写“已经解决”。
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-heading reveal">
+      <div class="eyebrow">快速判断</div>
+      <h2>哪些结果需要继续核对</h2>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>检测结果</th>
+            <th>初步判断</th>
+            <th>下一步</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>连接后公网IP变为预期出口</td>
+            <td>出口变化符合预期</td>
+            <td>继续检查DNS与WebRTC</td>
+          </tr>
+
+          <tr>
+            <td>连接前后公网IP完全相同</td>
+            <td>可能未接管当前页面</td>
+            <td>核对分流、扩展范围并换浏览器复测</td>
+          </tr>
+
+          <tr>
+            <td>WebRTC显示192.168等内网地址</td>
+            <td>不能直接判定公网IP泄露</td>
+            <td>比较是否出现连接前真实公网IP</td>
+          </tr>
+
+          <tr>
+            <td>DNS地区与出口不同</td>
+            <td>不能仅凭地区定性</td>
+            <td>核对公共DNS、Anycast和浏览器DoH</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner boundary reveal">
+    <div>
+      <div class="eyebrow">VPN可以帮助</div>
+      <h2>保护传输路径的一部分</h2>
+
+      <ul>
+        <li>改变网站看到的公网出口地址。</li>
+        <li>在设备与VPN服务器之间建立加密传输路径。</li>
+        <li>降低本地网络直接观察传输内容的能力。</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="eyebrow">VPN不能自动解决</div>
+      <h2>账号、Cookie与设备识别</h2>
+
+      <ul>
+        <li>登录账号后，网站仍知道账号身份。</li>
+        <li>Cookie、像素和浏览器指纹仍可关联访问。</li>
+        <li>恶意软件、弱密码和过度应用权限仍需单独处理。</li>
+      </ul>
+
+      <a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">
+        查看完整隐私边界 →
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="section-inner">
+    <div class="section-heading reveal">
+      <div class="eyebrow">官方信息与独立检测</div>
+      <h2>把产品说明与检测结果分开记录</h2>
+
+      <p>
+        官网可以说明产品当前如何描述功能，检测只能反映特定设备、网络和时间下的结果。
+        需要核对绝尘加速器当前说明时，请访问
+        <a href="https://www.juechenjsq.co/" rel="nofollow sponsored">绝尘加速器官网</a>；
+        不要把官方描述写成独立实测结论。
+      </p>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>连接成功就代表没有泄露吗？</summary>
+        <p>不代表。至少还要比较公网IP、DNS和WebRTC，并记录连接前基线。</p>
+      </details>
+
+      <details>
+        <summary>一个检测工具显示正常是否足够？</summary>
+        <p>不够。不同工具观察的信号和实现不同，重要场景应使用第二个工具或浏览器交叉复测。</p>
+      </details>
+
+      <details>
+        <summary>检测网站本身会看到我的IP吗？</summary>
+        <p>会。网站要响应请求就会接触访问来源，因此不应把未知检测站当作零信任环境，也不要上传包含账号或完整地址的截图。</p>
+      </details>
+    </div>
+  </div>
+</section>
