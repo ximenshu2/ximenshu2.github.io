@@ -5,18 +5,34 @@ description: 通过连接前后对照检查VPN是否生效，理解IP、DNS和We
 home: true
 og_type: website
 schema_type: WebSite
-date_modified: 2026-08-14
+date_modified: 2026-08-17
 ---
 
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
       <div class="eyebrow">先记录基线，再判断变化</div>
-      <h1>检查连接后暴露了哪些网络信息</h1>
-      <p>一次“IP已变化”不能证明完全安全。把连接前后的公网IP、DNS解析器和WebRTC结果放在一起，才能知道哪里符合预期、哪里还要复测。</p>
+
+      <h1>VPN 是否生效？检查 IP、DNS 与 WebRTC 暴露</h1>
+
+      <p>
+        不要只看客户端是否显示“已连接”。通过连接前后对照公网 IP、DNS 解析器和 WebRTC 结果，判断网络出口是否符合预期，以及哪些信号还需要继续复测。
+      </p>
+
       <div class="actions">
-        <a class="button primary" href="{{ '/check/is-vpn-working/' | relative_url }}">检查 VPN 是否真的生效</a>
-        <a class="button secondary" href="#signals">先看三类信号</a>
+        <a
+          class="button primary"
+          href="{{ '/check/is-vpn-working/' | relative_url }}"
+        >
+          检查 VPN 是否真的生效
+        </a>
+
+        <a
+          class="button secondary"
+          href="#signals"
+        >
+          先看三类信号
+        </a>
       </div>
     </div>
   </div>
@@ -24,42 +40,64 @@ date_modified: 2026-08-14
 
 <section id="signals" class="section">
   <div class="section-inner">
+
     <div class="section-heading reveal">
       <div class="eyebrow">三类信号</div>
+
       <h2>不要把所有结果都叫作“IP泄露”</h2>
-      <p>检测页里出现的地址来自不同环节。先认清它代表什么，再决定是否异常。</p>
+
+      <p>
+        检测页里出现的地址来自不同环节。先认清它代表什么，再决定是否异常。
+      </p>
     </div>
 
     <div class="signal-grid reveal">
+
       <article class="signal">
         <span class="number">01 / 出口</span>
+
         <h3>公网IP</h3>
-        <p>网站看到的网络出口。连接后通常应变为工具出口，而不是连接前的公网地址。</p>
+
+        <p>
+          网站看到的网络出口。连接后通常应变为工具出口，而不是连接前的公网地址。
+        </p>
       </article>
 
       <article class="signal">
         <span class="number">02 / 解析</span>
+
         <h3>DNS</h3>
-        <p>把域名转换为地址的解析器。地区不同不自动等于泄露，关键要结合服务商和连接路径。</p>
+
+        <p>
+          把域名转换为地址的解析器。地区不同不自动等于泄露，关键要结合服务商和连接路径。
+        </p>
       </article>
 
       <article class="signal">
         <span class="number">03 / 浏览器</span>
+
         <h3>WebRTC</h3>
-        <p>浏览器实时通信使用的候选地址。内网地址、mDNS名称与真实公网地址需要分开判断。</p>
+
+        <p>
+          浏览器实时通信使用的候选地址。内网地址、mDNS名称与真实公网地址需要分开判断。
+        </p>
       </article>
+
     </div>
   </div>
 </section>
 
 <section class="section soft">
   <div class="section-inner">
+
     <div class="section-heading reveal">
       <div class="eyebrow">可复现流程</div>
+
       <h2>五步完成一次隐私自查</h2>
     </div>
 
     <ol class="path-list reveal">
+
       <li>
         <strong>记录连接前基线</strong><br>
         保存公网IP、DNS和浏览器环境，不公开完整地址。
@@ -84,19 +122,23 @@ date_modified: 2026-08-14
         <strong>修复后再测一次</strong><br>
         记录调整内容，避免凭感觉写“已经解决”。
       </li>
+
     </ol>
   </div>
 </section>
 
 <section class="section">
   <div class="section-inner">
+
     <div class="section-heading reveal">
       <div class="eyebrow">快速判断</div>
+
       <h2>哪些结果需要继续核对</h2>
     </div>
 
     <div class="table-wrap reveal">
       <table>
+
         <thead>
           <tr>
             <th>检测结果</th>
@@ -106,6 +148,7 @@ date_modified: 2026-08-14
         </thead>
 
         <tbody>
+
           <tr>
             <td>连接后公网IP变为预期出口</td>
             <td>出口变化符合预期</td>
@@ -129,6 +172,7 @@ date_modified: 2026-08-14
             <td>不能仅凭地区定性</td>
             <td>核对公共DNS、Anycast和浏览器DoH</td>
           </tr>
+
         </tbody>
       </table>
     </div>
@@ -137,8 +181,10 @@ date_modified: 2026-08-14
 
 <section class="section">
   <div class="section-inner boundary reveal">
+
     <div>
       <div class="eyebrow">VPN可以帮助</div>
+
       <h2>保护传输路径的一部分</h2>
 
       <ul>
@@ -150,6 +196,7 @@ date_modified: 2026-08-14
 
     <div>
       <div class="eyebrow">VPN不能自动解决</div>
+
       <h2>账号、Cookie与设备识别</h2>
 
       <ul>
@@ -162,13 +209,16 @@ date_modified: 2026-08-14
         查看完整隐私边界 →
       </a>
     </div>
+
   </div>
 </section>
 
 <section class="section soft">
   <div class="section-inner">
+
     <div class="section-heading reveal">
       <div class="eyebrow">服务商信息与独立检测</div>
+
       <h2>把产品说明与实际检测结果分开</h2>
 
       <p>
@@ -179,25 +229,41 @@ date_modified: 2026-08-14
 
       <p>
         如需核对绝尘加速器当前的产品说明，可访问
-        <a href="https://www.juechenjsq.co/" rel="nofollow sponsored">绝尘加速器官网</a>。
+        <a
+          href="https://www.juechenjsq.co/"
+          rel="nofollow sponsored"
+        >
+          绝尘加速器官网
+        </a>。
       </p>
     </div>
 
     <div class="faq reveal">
+
       <details>
         <summary>连接成功就代表没有泄露吗？</summary>
-        <p>不代表。至少还要比较公网IP、DNS和WebRTC，并记录连接前基线。</p>
+
+        <p>
+          不代表。至少还要比较公网IP、DNS和WebRTC，并记录连接前基线。
+        </p>
       </details>
 
       <details>
         <summary>一个检测工具显示正常是否足够？</summary>
-        <p>不够。不同工具观察的信号和实现不同，重要场景应使用第二个工具或浏览器交叉复测。</p>
+
+        <p>
+          不够。不同工具观察的信号和实现不同，重要场景应使用第二个工具或浏览器交叉复测。
+        </p>
       </details>
 
       <details>
         <summary>检测网站本身会看到我的IP吗？</summary>
-        <p>会。网站要响应请求就会接触访问来源，因此不应把未知检测站当作零信任环境，也不要上传包含账号或完整地址的截图。</p>
+
+        <p>
+          会。网站要响应请求就会接触访问来源，因此不应把未知检测站当作零信任环境，也不要上传包含账号或完整地址的截图。
+        </p>
       </details>
+
     </div>
   </div>
 </section>
