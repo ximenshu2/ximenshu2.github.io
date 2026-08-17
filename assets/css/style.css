@@ -470,13 +470,24 @@ img{
   align-items:flex-start
 }
 
+/*
+  默认情况下内容直接可见。
+  只有 HTML 上存在 .js 时，才启用 reveal 动画。
+  这样即使 JavaScript 加载失败，正文也不会消失。
+*/
+
 .reveal{
+  opacity:1;
+  transform:none
+}
+
+.js .reveal{
   opacity:0;
   transform:translateY(16px);
   transition:opacity .55s ease,transform .55s ease
 }
 
-.reveal.visible{
+.js .reveal.visible{
   opacity:1;
   transform:none
 }
@@ -622,7 +633,7 @@ img{
     scroll-behavior:auto
   }
 
-  .reveal{
+  .js .reveal{
     opacity:1;
     transform:none;
     transition:none
