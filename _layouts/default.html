@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
 
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1"
@@ -240,7 +244,6 @@
         class="site-nav"
         aria-label="主导航"
       >
-
         <a
           href="{{ '/check/is-vpn-working/' | relative_url }}"
           {% if page.url == '/check/is-vpn-working/' %}aria-current="page"{% endif %}
@@ -268,8 +271,8 @@
         >
           隐私边界
         </a>
-
       </nav>
+
     </div>
   </header>
 
