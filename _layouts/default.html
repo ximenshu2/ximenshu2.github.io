@@ -101,14 +101,14 @@
   {% if page.schema_type == "Article" and page.date_published %}
   <meta
     property="article:published_time"
-    content="{{ page.date_published }}"
+    content="{{ page.date_published | date_to_xmlschema }}"
   >
   {% endif %}
 
   {% if page.schema_type == "Article" and page.date_modified %}
   <meta
     property="article:modified_time"
-    content="{{ page.date_modified }}"
+    content="{{ page.date_modified | date_to_xmlschema }}"
   >
   {% endif %}
 
@@ -187,11 +187,11 @@
     }
 
     {% if page.date_published %},
-    "datePublished": {{ page.date_published | jsonify }}
+    "datePublished": {{ page.date_published | date_to_xmlschema | jsonify }}
     {% endif %}
 
     {% if page.date_modified %},
-    "dateModified": {{ page.date_modified | jsonify }}
+    "dateModified": {{ page.date_modified | date_to_xmlschema | jsonify }}
     {% endif %}
   }
   </script>
