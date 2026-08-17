@@ -3,7 +3,7 @@ layout: default
 title: WebRTC会泄露真实IP吗？检测结果怎么看
 description: 区分WebRTC中的公网IP、内网IP和mDNS名称，提供连接前后检测、异常判断和修复后复测方法。
 schema_type: Article
-date_modified: 2026-08-14
+date_modified: 2026-08-17
 ---
 
 <article class="article">
@@ -17,7 +17,7 @@ date_modified: 2026-08-14
     </p>
 
     <div class="meta">
-      <span>最后更新：2026-08-14</span>
+      <span>最后更新：2026-08-17</span>
       <span>核对范围：现代桌面与移动浏览器</span>
     </div>
   </header>
@@ -135,18 +135,26 @@ date_modified: 2026-08-14
     </details>
   </div>
 
-  <h2>来源与工具</h2>
+  <h2>技术参考</h2>
+
+  <ul class="source-list">
+    <li>
+      <a href="https://arxiv.org/abs/1709.05395">
+        研究论文：One Leak Will Sink A Ship
+      </a>
+    </li>
+  </ul>
+
+  <h2>辅助测试工具</h2>
+
+  <p>
+    第三方WebRTC检测网站可以用于观察当前浏览器产生的候选地址，但检测结果应结合连接前基线、浏览器版本和网络环境综合判断。
+  </p>
 
   <ul class="source-list">
     <li>
       <a href="https://www.ipok.cc/zh/tools/webrtc/">
-        IPOK：WebRTC候选与地址类型说明
-      </a>
-    </li>
-
-    <li>
-      <a href="https://arxiv.org/abs/1709.05395">
-        研究论文：One Leak Will Sink A Ship
+        IPOK：WebRTC检测工具
       </a>
     </li>
   </ul>
@@ -160,7 +168,7 @@ date_modified: 2026-08-14
       </a>
 
       <a href="{{ '/check/is-vpn-working/' | relative_url }}">
-        VPN是否生效五项检查
+        VPN 是否生效怎么检查
       </a>
     </div>
   </div>
