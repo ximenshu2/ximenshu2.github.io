@@ -25,12 +25,10 @@
     content="{{ page.description | default: site.description }}"
   >
 
-  {% if page.robots %}
   <meta
     name="robots"
-    content="{{ page.robots }}"
+    content="{{ page.robots | default: 'index, follow, max-image-preview:large' }}"
   >
-  {% endif %}
 
   <link
     rel="canonical"
