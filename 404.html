@@ -1,29 +1,42 @@
 ---
 layout: default
 title: 页面未找到｜网络隐私检测指南
-description: 该页面不存在或地址已经变化。
+description: 当前地址没有对应页面，可返回首页或继续进行 VPN、DNS 与 WebRTC 自查。
 robots: noindex, follow
-permalink: /404.html
+sitemap: false
 ---
 
 <article class="article">
   <header class="article-header">
     <div class="eyebrow">404</div>
 
-    <h1>没有找到这个页面</h1>
+    <h1>这个页面不存在</h1>
 
     <p class="dek">
-      地址可能输入错误，或者页面已经移动。你可以返回首页，也可以直接进入下面的常用内容。
+      你访问的地址可能已经改变、被删除，或者链接输入有误。
+      可以返回首页，或直接继续网络隐私自查。
     </p>
   </header>
 
+  <div class="answer">
+    <strong>建议：</strong>
+    如果你是从旧链接进入这里，可以先返回 VPN 自查页，
+    再按照 IP、DNS 和 WebRTC 的顺序重新找到需要的内容。
+  </div>
+
   <div class="actions">
-    <a class="button primary" href="{{ '/' | relative_url }}">
+    <a
+      class="button primary"
+      href="{{ '/' | relative_url }}"
+    >
       返回首页
     </a>
 
-    <a class="button secondary" href="{{ '/check/is-vpn-working/' | relative_url }}">
-      VPN 自查
+    <a
+      class="button secondary"
+      href="{{ '/check/is-vpn-working/' | relative_url }}"
+    >
+      开始 VPN 自查
     </a>
   </div>
 
@@ -31,16 +44,28 @@ permalink: /404.html
     <h2>常用页面</h2>
 
     <div class="related-links">
+      <a href="{{ '/check/is-vpn-working/' | relative_url }}">
+        VPN 是否真的生效
+      </a>
+
       <a href="{{ '/leak/dns-leak-test-guide/' | relative_url }}">
-        DNS 泄露怎么判断
+        DNS 泄露检测
       </a>
 
       <a href="{{ '/leak/webrtc-ip-leak-guide/' | relative_url }}">
-        WebRTC IP 暴露怎么判断
+        WebRTC IP 暴露检测
       </a>
 
       <a href="{{ '/privacy/what-vpn-does-not-protect/' | relative_url }}">
         VPN 不能保护什么
+      </a>
+
+      <a href="{{ '/about/' | relative_url }}">
+        关于本站
+      </a>
+
+      <a href="{{ '/privacy-policy/' | relative_url }}">
+        隐私说明
       </a>
     </div>
   </div>
