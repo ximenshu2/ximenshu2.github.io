@@ -54,7 +54,19 @@ if (toggle && nav) {
 
 const reveals = document.querySelectorAll('.reveal');
 
-if ('IntersectionObserver' in window) {
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+
+function showAllReveals() {
+  reveals.forEach((element) => {
+    element.classList.add('visible');
+  });
+}
+
+if (prefersReducedMotion) {
+  showAllReveals();
+} else if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -73,7 +85,5 @@ if ('IntersectionObserver' in window) {
     observer.observe(element);
   });
 } else {
-  reveals.forEach((element) => {
-    element.classList.add('visible');
-  });
+  showAllReveals();
 }
